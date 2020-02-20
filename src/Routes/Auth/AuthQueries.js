@@ -21,3 +21,16 @@ export const CREATE_ACCOUNT = gql`
     )
   }
 `;
+
+export const CONFIRM_SECRET = gql`
+  mutation confirmSecret($secret: String!, $email: String!) {
+    confirmSecret(secret: $secret, email: $email)
+  }
+`;
+
+// Login인 검증 @client를 쓰는 이유는 client한정하여 LocalState.js의 logUserIn을 사용하도록 하기 위해서
+export const LOCAL_LOG_IN = gql`
+  mutation logUserIn($token: String!) {
+    logUserIn(token: $token) @client
+  }
+`;
