@@ -20,7 +20,7 @@ export const resolvers = {
     logUserOut: (_, __, { cache }) => {
       localStorage.removeItem("token");
       // 모든 캐쉬 등 정보 후 새로고침
-      window.location.reload();
+      window.location = "/";
       return null;
     }
   }

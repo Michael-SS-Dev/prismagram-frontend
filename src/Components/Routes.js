@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Route, Switch } from "react-router-dom";
-import Auth from "../Routes/Auth/AuthContainer";
+import { Route, Switch, Redirect } from "react-router-dom";
+import Auth from "../Routes/Auth/index";
 import Feed from "../Routes/Feed";
 import Explore from "../Routes/Explore";
-import Search from "../Routes/Search";
-import Profile from "../Routes/Profile";
+import Search from "../Routes/Search/index";
+import Profile from "../Routes/Profile/index";
 
 const LoggedInRoutes = () => (
   // switch는 단 하나의 라우트만 연결해줌
@@ -14,11 +14,13 @@ const LoggedInRoutes = () => (
     <Route path="/explore" component={Explore} />
     <Route path="/search" component={Search} />
     <Route path="/:username" component={Profile} />
+    <Redirect from="*" to="/" />
   </Switch>
 );
 const LoggedOutRoutes = () => (
   <Switch>
     <Route exact path="/" component={Auth} />
+    <Redirect from="*" to="/" />
   </Switch>
 );
 

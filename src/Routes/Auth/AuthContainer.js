@@ -72,6 +72,7 @@ export default () => {
             setTimeout(() => setAction("signUp"), 3000);
           } else {
             toast.success("Check your inbox for your login secret");
+            setTimeout(() => setAction("confirm"), 3000);
           }
         } catch {
           toast.error("Can't request secret, try again");

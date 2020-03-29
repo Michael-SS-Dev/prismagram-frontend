@@ -14,7 +14,11 @@ const Container = styled.button`
   font-size: 14px;
 `;
 
-const Button = ({ text }) => <Container>{text}</Container>;
+const Button = ({ text, onClick, className }) => (
+  <Container onClick={onClick} className={className}>
+    {text}
+  </Container>
+);
 
 Button.propTypes = {
   text: PropTypes.string.isRequired
