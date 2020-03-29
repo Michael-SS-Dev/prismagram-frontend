@@ -8,6 +8,7 @@ import Search from "../Routes/Search";
 import Profile from "../Routes/Profile";
 
 const LoggedInRoutes = () => (
+  // switch는 단 하나의 라우트만 연결해줌
   <Switch>
     <Route exact path="/" component={Feed} />
     <Route path="/explore" component={Explore} />

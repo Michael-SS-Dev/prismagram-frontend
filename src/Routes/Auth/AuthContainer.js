@@ -34,12 +34,12 @@ export default () => {
   */
 
   // 변수로 사용할 requestSecret과의 중복을 필하기 위해 Mutation 붙여줌
-  const requestSecretMutation = useMutation(LOG_IN, {
+  const [requestSecretMutation] = useMutation(LOG_IN, {
     variables: { email: email.value }
   });
 
   // graphql의 createAcoount 사용
-  const createAccountMutation = useMutation(CREATE_ACCOUNT, {
+  const [createAccountMutation] = useMutation(CREATE_ACCOUNT, {
     variables: {
       email: email.value,
       username: username.value,
@@ -47,13 +47,13 @@ export default () => {
       lastName: lastName.value
     }
   });
-  const confirmSecretMutation = useMutation(CONFIRM_SECRET, {
+  const [confirmSecretMutation] = useMutation(CONFIRM_SECRET, {
     variables: {
       email: email.value,
       secret: secret.value
     }
   });
-  const localLogInMutation = useMutation(LOCAL_LOG_IN);
+  const [localLogInMutation] = useMutation(LOCAL_LOG_IN);
   const onSubmit = async e => {
     e.preventDefault();
     //만약 action이 login이고 email이 empty가 아니면 requestSecret을 할 것

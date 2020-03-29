@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
-import { gql } from "apollo-boost";
+import { ME } from "../SharedQueries";
 import Input from "./Input";
 import useInput from "../Hooks/useInput";
 import { Compass, HeartEmpty, User, Logo } from "./Icons";
@@ -20,6 +20,7 @@ const Header = styled.header`
   justify-content: center;
   align-items: center;
   padding: 25px 0px;
+  z-index: 2;
 `;
 
 const HeaderWrapper = styled.div`
@@ -62,17 +63,12 @@ const HeaderLink = styled(Link)`
   }
 `;
 
-const ME = gql`
-  {
-    me {
-      username
-    }
-  }
-`;
-
 export default withRouter(({ history }) => {
   const search = useInput("");
-  const { data } = useQuery(ME);
+  const meQuery = useQuery(ME);
+  const data = meQuery.data;
+  console.log(meQuery);
+  console.log(data);
   const onSearchSubmit = e => {
     e.preventDefault();
     history.push(`/search?term=${search.value}`);
@@ -87,7 +83,11 @@ export default withRouter(({ history }) => {
         </HeaderColumn>
         <HeaderColumn>
           <form onSubmit={onSearchSubmit}>
-            <SearchInput {...search} placeholder="Search" />
+            <SearchInput
+              value={search.value}
+              onChange={search.onChange}
+              placeholder="Search"
+            />
           </form>
         </HeaderColumn>
         <HeaderColumn>
@@ -97,7 +97,7 @@ export default withRouter(({ history }) => {
           <HeaderLink to="/notifications">
             <HeartEmpty />
           </HeaderLink>
-          {!data.me ? (
+          {!(data && data.me) ? (
             <HeaderLink to="/#">
               <User />
             </HeaderLink>
